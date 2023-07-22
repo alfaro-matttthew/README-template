@@ -1,0 +1,18 @@
+{
+  "name": "readme-template",
+  "version": "1.0.0",
+  "description": "Creates a template you can fill out to generate a clean and professional README.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "readme",
+    "generate"
+  ],
+  "author": "Matthew Alfaro",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
