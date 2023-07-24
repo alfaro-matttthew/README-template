@@ -1,43 +1,51 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateREADME = require('./generateREADME');
 
-inquirer.prompt([
+questions = [
     {
         type: 'input',
         name: 'projectName',
         message: 'What is the name of your project?',
+        default: 'New Project'
     },
     // Description
     {
         type: 'input',
         name: 'descMain',
         message: 'What does this project do?',
+        default: '',
     },
     {
         type: 'input',
         name: 'descMotivation',
         message: 'What was your motivation?',
+        default: '',
     },
     {
         type: 'input',
         name: 'descPurpose',
         message: 'Why did you build this project?',
+        default: '',
     },
     {
         type: 'input',
         name: 'descProblemSolved',
         message: 'What problem does it solve?',
+        default: '',
     },
     {
         type: 'input',
         name: 'descLearn',
         message: 'What did you learn?',
+        default: '',
     },
     // Usage
     {
         type: 'input',
         name: 'usage',
         message: 'How does the user use this project?',
+        default: '',
     },
     // Credits
     {
@@ -49,7 +57,7 @@ inquirer.prompt([
         type: 'input',
         name: 'creditsColabName',
         when: (answers) => answers.creditsConfirmColab === true,
-        message: 'What is the names of your collaborator?',
+        message: 'What is the name of your collaborator?',
     },
     {
         type: 'input',
@@ -69,12 +77,20 @@ inquirer.prompt([
         when: (answers) => answers.licenseConfirmColab === true,
         message: 'Paste the license text here:',
     },
-  ])
-  .then( () => {
-    console.log("\x1b[32m",'Success! Check out your new README');
+  ];
 
-    //output to a file
-    fs.writeFile(filename, JSON.stringify(data, null, '\t'), (err) => 
-    err ? console.log(err) : console.log('Data has been saved')
-    );
-  });
+function writeToFile(filename, data) {
+    fs.writeFile(filename, data, (err) => 
+    err ? console.log(err) : console.log('Success!'))
+};
+
+function init() {
+    inquirer.prompt(questions)
+        .then(function(answers) {
+            writeToFile('README.md', generateREADME(answers));
+        })
+}
+
+
+
+init();
